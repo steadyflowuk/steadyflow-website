@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SteadyFlow — content services for wellness practitioners. Blogs, newsletters and social content for coaches, therapists, studios and clinics. Consistent, on-brand, delivered.">
+<title>SteadyFlow — Content for Wellness Practitioners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:#fff; color:#162028; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+:root {
+  --dark:#0D1C22; --primary:#3B6E82; --accent:#6EA882;
+  --light:#F4F8F6; --cream:#EDF3F1; --ink:#162028; --muted:#6B808A;
+  --border:rgba(59,110,130,0.10);
+}
+.wrap { max-width:1160px; margin:0 auto; padding:0 48px; }
+@media(max-width:680px){ .wrap { padding:0 24px; } }
+
+.topo { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:hidden; }
+.topo--drift { animation:topoDrift 60s ease-in-out infinite alternate; }
+@keyframes topoDrift { from { transform:translate(0,0); } to { transform:translate(-60px,-30px); } }
+
+.r { opacity:0; transform:translateY(30px); transition:opacity .7s ease, transform .7s ease; }
+.r.in { opacity:1; transform:none; }
+.r.d1{transition-delay:.08s}.r.d2{transition-delay:.16s}.r.d3{transition-delay:.24s}.r.d4{transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){ .r{opacity:1;transform:none;transition:none} .topo--drift{animation:none} }
+
+/* NAV */
+#nav { position:fixed; top:0; left:0; right:0; z-index:200; transition:background .35s, box-shadow .35s; }
+#nav.solid { background:rgba(13,28,34,.94); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); box-shadow:0 1px 0 rgba(59,110,130,.15); }
+.nav-inner { max-width:1160px; margin:0 auto; padding:0 48px; display:flex; align-items:center; justify-content:space-between; height:70px; }
+.nav-links { display:flex; align-items:center; gap:30px; list-style:none; }
+.nav-links a { font-size:13.5px; font-weight:500; color:rgba(244,248,246,.72); text-decoration:none; transition:color .18s; }
+.nav-links a:hover { color:#F4F8F6; }
+.nav-cta { background:var(--accent); color:var(--dark)!important; padding:9px 20px; border-radius:100px; font-weight:600!important; transition:background .18s, transform .18s!important; }
+.nav-cta:hover { background:#7ec896!important; transform:translateY(-1px); }
+
+/* HERO */
+#hero { position:relative; min-height:100vh; background:var(--dark); display:flex; align-items:center; overflow:hidden; }
+.hero-body { position:relative; z-index:2; padding:140px 48px 100px; max-width:1160px; margin:0 auto; width:100%; }
+.hero-tag { display:inline-flex; align-items:center; gap:10px; font-size:10.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:28px; opacity:0; animation:fadeUp .6s ease .15s both; }
+.hero-tag::before { content:''; width:22px; height:1px; background:var(--accent); }
+.hero-h1 { font-size:clamp(48px,8vw,92px); font-weight:700; letter-spacing:-.045em; line-height:.98; color:var(--light); margin-bottom:26px; opacity:0; animation:fadeUp .7s ease .4s both; max-width:860px; }
+.hero-h1 span { color:var(--accent); }
+.hero-p { font-size:clamp(16px,1.8vw,19px); font-weight:300; color:rgba(244,248,246,.60); line-height:1.68; max-width:520px; margin-bottom:46px; opacity:0; animation:fadeUp .7s ease .65s both; }
+.hero-btns { display:flex; gap:16px; align-items:center; flex-wrap:wrap; opacity:0; animation:fadeUp .7s ease .88s both; }
+.btn-sage { display:inline-flex; align-items:center; gap:9px; background:var(--accent); color:var(--dark); font-size:14px; font-weight:600; padding:14px 28px; border-radius:100px; text-decoration:none; transition:background .18s, transform .18s, box-shadow .18s; }
+.btn-sage:hover { background:#7ec896; transform:translateY(-2px); box-shadow:0 8px 24px rgba(110,168,130,.3); }
+.btn-ghost { display:inline-flex; align-items:center; gap:9px; font-size:14px; font-weight:500; color:rgba(244,248,246,.62); text-decoration:none; padding:14px 0; border-bottom:1px solid rgba(244,248,246,.18); transition:color .18s, border-color .18s; }
+.btn-ghost:hover { color:var(--light); border-color:rgba(244,248,246,.55); }
+.scroll-cue { position:absolute; bottom:38px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:7px; opacity:0; animation:fadeIn .8s ease 1.6s both; }
+.scroll-cue span { font-size:9.5px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:rgba(244,248,246,.28); }
+.scroll-line { width:1px; height:38px; background:linear-gradient(to bottom, rgba(244,248,246,.32), transparent); animation:lineAnim 2.2s ease-in-out 1.6s infinite; }
+@keyframes lineAnim { 0%{transform:scaleY(0);transform-origin:top;opacity:1} 48%{transform:scaleY(1);transform-origin:top;opacity:1} 49%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom;opacity:.3} }
+
+/* STRIP */
+#strip { background:var(--light); border-bottom:1px solid var(--border); padding:24px 48px; }
+.strip-inner { max-width:1160px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+.strip-label { font-size:12px; font-weight:500; color:var(--muted); white-space:nowrap; }
+.chips { display:flex; gap:8px; flex-wrap:wrap; }
+.chip { font-size:11.5px; font-weight:500; color:var(--primary); background:rgba(59,110,130,.09); padding:5px 13px; border-radius:100px; }
+.strip-stats { display:flex; gap:36px; }
+.stat-n { display:block; font-size:22px; font-weight:700; color:var(--dark); letter-spacing:-.03em; line-height:1; }
+.stat-l { font-size:11px; font-weight:500; color:var(--muted); margin-top:2px; }
+
+/* SECTION CHROME */
+.sec { padding:108px 48px; }
+.sec--dark { background:var(--dark); position:relative; overflow:hidden; }
+.sec--cream { background:var(--cream); }
+.sec--white { background:#fff; }
+.sec--primary { background:var(--primary); position:relative; overflow:hidden; }
+.sec-kicker { font-size:10.5px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; margin-bottom:11px; }
+.kicker--teal { color:var(--primary); } .kicker--sage { color:var(--accent); }
+.sec-h2 { font-size:clamp(34px,4.8vw,56px); font-weight:700; letter-spacing:-.04em; line-height:1.06; margin-bottom:16px; }
+.h2--dark { color:var(--dark); } .h2--light { color:var(--light); }
+.sec-sub { font-size:16px; font-weight:300; line-height:1.68; max-width:480px; margin-bottom:64px; }
+.sub--mid { color:var(--muted); } .sub--light { color:rgba(244,248,246,.58); }
+
+/* SERVICES */
+.services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.svc { background:var(--light); border-radius:20px; padding:32px 28px; border:1px solid var(--border); transition:transform .25s, box-shadow .25s; }
+.svc:hover { transform:translateY(-5px); box-shadow:0 18px 44px rgba(13,28,34,.10); }
+.svc-icon { width:42px; height:42px; border-radius:12px; background:rgba(59,110,130,.10); display:flex; align-items:center; justify-content:center; margin-bottom:20px; }
+.svc-title { font-size:16px; font-weight:700; color:var(--dark); letter-spacing:-.02em; margin-bottom:8px; }
+.svc-desc { font-size:13.5px; font-weight:300; color:var(--muted); line-height:1.62; }
+
+/* PROCESS */
+.process-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:52px; position:relative; z-index:2; }
+.process-grid::before { content:''; position:absolute; top:26px; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, rgba(59,110,130,.25) 20%, rgba(59,110,130,.25) 80%, transparent); z-index:-1; }
+.step-n { font-size:52px; font-weight:700; letter-spacing:-.05em; color:rgba(59,110,130,.28); line-height:1; margin-bottom:18px; }
+.step-t { font-size:20px; font-weight:700; color:var(--light); letter-spacing:-.02em; margin-bottom:10px; }
+.step-d { font-size:13.5px; font-weight:300; color:rgba(244,248,246,.55); line-height:1.72; }
+
+/* SHOWCASE */
+.show-note {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:12px; font-weight:500; color:var(--primary);
+  background:rgba(59,110,130,.08); border:1px solid rgba(59,110,130,.14);
+  padding:8px 16px; border-radius:100px; margin-bottom:40px;
+}
+.samples-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.sample { background:#fff; border-radius:20px; overflow:hidden; border:1px solid var(--border); box-shadow:0 2px 8px rgba(13,28,34,.04); transition:transform .25s, box-shadow .25s; display:flex; flex-direction:column; }
+.sample:hover { transform:translateY(-5px); box-shadow:0 18px 44px rgba(13,28,34,.12); }
+.sample-head { padding:20px 22px 16px; border-bottom:1px solid var(--border); }
+.sample-type { display:flex; align-items:center; gap:6px; font-size:9.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--primary); margin-bottom:9px; }
+.tdot { width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.sample-title { font-size:15px; font-weight:700; color:var(--dark); letter-spacing:-.02em; line-height:1.35; }
+.sample-body { padding:16px 22px 20px; display:flex; flex-direction:column; flex:1; }
+.sample-ex { font-size:13px; font-weight:300; color:var(--muted); line-height:1.65; margin-bottom:16px; flex:1; }
+.sample-foot { display:flex; align-items:center; justify-content:space-between; font-size:11px; }
+.s-meta { font-weight:500; color:rgba(107,128,138,.65); }
+.s-badge { font-size:10.5px; font-weight:600; color:var(--primary); background:rgba(59,110,130,.08); padding:4px 11px; border-radius:100px; }
+.sample-head--email { background:var(--light); }
+.email-from { font-size:11px; color:var(--muted); margin-bottom:4px; }
+.email-from strong { color:var(--ink); font-weight:600; }
+.email-subj { font-size:13px; font-weight:600; color:var(--dark); line-height:1.35; }
+.ig-handle { display:flex; align-items:center; gap:10px; margin-bottom:13px; }
+.ig-avatar { width:38px; height:38px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#fff; flex-shrink:0; }
+.ig-name { font-size:13px; font-weight:600; color:var(--dark); line-height:1.2; }
+.ig-loc { font-size:11px; font-weight:400; color:var(--muted); }
+
+/* PRICING */
+.price-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; align-items:stretch; position:relative; z-index:2; }
+.plan { background:rgba(244,248,246,.045); border:1px solid rgba(244,248,246,.10); border-radius:22px; padding:36px 30px; display:flex; flex-direction:column; position:relative; }
+.plan--hot { background:rgba(110,168,130,.10); border-color:rgba(110,168,130,.40); }
+.plan-flag { position:absolute; top:-12px; left:50%; transform:translateX(-50%); font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; background:var(--accent); color:var(--dark); padding:5px 14px; border-radius:100px; white-space:nowrap; }
+.plan-name { font-size:13px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+.plan-price { font-size:40px; font-weight:700; letter-spacing:-.04em; color:var(--light); line-height:1; }
+.plan-price small { font-size:14px; font-weight:400; color:rgba(244,248,246,.45); letter-spacing:0; }
+.plan-from { font-size:11px; color:rgba(244,248,246,.40); margin-top:5px; margin-bottom:24px; }
+.plan-list { list-style:none; margin-bottom:30px; flex:1; }
+.plan-list li { font-size:13.5px; font-weight:300; color:rgba(244,248,246,.72); line-height:1.5; padding:8px 0 8px 26px; position:relative; border-bottom:1px solid rgba(244,248,246,.06); }
+.plan-list li::before { content:''; position:absolute; left:2px; top:14px; width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.plan-btn { display:block; text-align:center; font-size:13.5px; font-weight:600; padding:13px; border-radius:100px; text-decoration:none; transition:transform .18s, background .18s; }
+.btn-plan-ghost { color:var(--light); border:1px solid rgba(244,248,246,.25); }
+.btn-plan-ghost:hover { border-color:rgba(244,248,246,.6); transform:translateY(-1px); }
+.btn-plan-solid { background:var(--accent); color:var(--dark); }
+.btn-plan-solid:hover { background:#7ec896; transform:translateY(-1px); }
+.price-note { position:relative; z-index:2; text-align:center; margin-top:28px; font-size:12.5px; color:rgba(244,248,246,.40); }
+
+/* WHY */
+.why-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.why { background:var(--light); border-radius:20px; padding:36px 32px; border:1px solid var(--border); }
+.why-ico { width:42px; height:42px; border-radius:12px; background:rgba(59,110,130,.10); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+.why-t { font-size:18px; font-weight:700; color:var(--dark); letter-spacing:-.025em; margin-bottom:9px; }
+.why-d { font-size:13.5px; font-weight:300; color:var(--muted); line-height:1.65; }
+
+/* CTA */
+.cta-body { position:relative; z-index:2; text-align:center; max-width:620px; margin:0 auto; }
+.cta-h2 { font-size:clamp(36px,5.5vw,60px); font-weight:700; letter-spacing:-.045em; line-height:1.06; color:#fff; margin-bottom:16px; }
+.cta-p { font-size:16px; font-weight:300; color:rgba(255,255,255,.68); line-height:1.65; margin-bottom:42px; }
+.btn-white { display:inline-flex; align-items:center; gap:9px; background:#fff; color:var(--primary); font-size:14.5px; font-weight:600; padding:16px 34px; border-radius:100px; text-decoration:none; box-shadow:0 4px 20px rgba(0,0,0,.18); transition:transform .18s, box-shadow .18s; }
+.btn-white:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,0,0,.22); }
+.cta-note { margin-top:15px; font-size:12px; color:rgba(255,255,255,.45); }
+.cta-note a { color:rgba(255,255,255,.7); }
+
+/* FOOTER */
+footer { background:var(--dark); padding:68px 48px 36px; border-top:1px solid rgba(59,110,130,.14); }
+.foot-top { max-width:1160px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:52px; margin-bottom:52px; }
+.foot-brand p { font-size:13.5px; font-weight:300; color:rgba(244,248,246,.45); line-height:1.65; margin-top:14px; max-width:270px; }
+.foot-col h4 { font-size:10px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--primary); margin-bottom:16px; }
+.foot-col a, .foot-col span { display:block; font-size:13.5px; font-weight:300; color:rgba(244,248,246,.52); text-decoration:none; margin-bottom:10px; transition:color .18s; }
+.foot-col a:hover { color:var(--light); }
+.foot-bottom { max-width:1160px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; padding-top:26px; border-top:1px solid rgba(244,248,246,.06); }
+.foot-copy { font-size:12px; color:rgba(244,248,246,.26); }
+.foot-links { display:flex; gap:20px; }
+.foot-links a { font-size:12px; font-weight:500; letter-spacing:.04em; color:rgba(244,248,246,.34); text-decoration:none; transition:color .18s; }
+.foot-links a:hover { color:rgba(244,248,246,.72); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+@media(max-width:920px) {
+  .services-grid,.samples-grid,.process-grid,.price-grid { grid-template-columns:1fr; }
+  .why-grid { grid-template-columns:1fr; }
+  .foot-top { grid-template-columns:1fr 1fr; gap:36px; }
+  .process-grid::before { display:none; }
+  .strip-inner { flex-direction:column; align-items:flex-start; }
+  .plan--hot { order:-1; }
+}
+@media(max-width:600px) {
+  .sec { padding:80px 24px; }
+  #strip { padding:20px 24px; }
+  .hero-body { padding:120px 24px 80px; }
+  .nav-inner { padding:0 24px; }
+  .foot-top { grid-template-columns:1fr; gap:28px; }
+  footer { padding:52px 24px 30px; }
+  .foot-bottom { flex-direction:column; align-items:flex-start; }
+  .nav-links { gap:18px; }
+  .nav-links li:not(:last-child) { display:none; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero" aria-label="SteadyFlow home">
+      <svg viewBox="0 0 192 46" width="160" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="8" cy="35" r="8" fill="#3B6E82"/>
+        <circle cx="22" cy="25" r="5.5" fill="#6EA882"/>
+        <circle cx="33" cy="17" r="3.5" fill="#F4F8F6" opacity=".82"/>
+        <text x="42" y="38" font-family="Inter,-apple-system,sans-serif" font-size="20" fill="#F4F8F6"><tspan font-weight="700" letter-spacing="-0.03em">Steady</tspan><tspan font-weight="300" dx="4" opacity=".8">Flow</tspan></text>
+      </svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">How it works</a></li>
+      <li><a href="#showcase">See the work</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#cta" class="nav-cta">Book a call</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="hero">
+  <svg class="topo topo--drift" id="topo-hero" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="hero-body">
+    <p class="hero-tag">Content for Wellness Practitioners</p>
+    <h1 class="hero-h1">Your practice, heard.<br><span>Consistently.</span></h1>
+    <p class="hero-p">Blogs, newsletters and social content for coaches, therapists, studios and clinics — written in your voice, delivered on schedule, while you focus on your clients.</p>
+    <div class="hero-btns">
+      <a href="#cta" class="btn-sage">
+        Book a free call
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="#162028" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#showcase" class="btn-ghost">
+        See what it could look like
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 3v8M4 8l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<div id="strip">
+  <div class="strip-inner">
+    <span class="strip-label">Made for</span>
+    <div class="chips">
+      <span class="chip">Pilates Studios</span>
+      <span class="chip">Nutritionists</span>
+      <span class="chip">Physiotherapists</span>
+      <span class="chip">Wellness Coaches</span>
+      <span class="chip">Therapists &amp; Counsellors</span>
+      <span class="chip">Personal Trainers</span>
+    </div>
+    <div class="strip-stats">
+      <div><span class="stat-n">48hr</span><div class="stat-l">first drafts</div></div>
+      <div><span class="stat-n">2</span><div class="stat-l">revision rounds included</div></div>
+      <div><span class="stat-n">1</span><div class="stat-l">point of contact</div></div>
+    </div>
+  </div>
+</div>
+
+<section id="services" class="sec sec--white">
+  <div class="wrap">
+    <div class="r">
+      <p class="sec-kicker kicker--teal">What we create</p>
+      <h2 class="sec-h2 h2--dark">Everything your practice<br>needs to say something.</h2>
+      <p class="sec-sub sub--mid">Your clients trust you with their wellbeing. Your content should earn the same trust — clear, warm, accurate, and showing up reliably.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc r d1">
+        <div class="svc-icon"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M2 4h15M2 8h10M2 12h15M2 16h7" stroke="#3B6E82" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3 class="svc-title">Blog Posts</h3>
+        <p class="svc-desc">Two to four posts a month that answer the questions your clients are already asking — building your authority and bringing the right people to your door.</p>
+      </div>
+      <div class="svc r d2">
+        <div class="svc-icon"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="9.5" cy="9.5" r="7" stroke="#3B6E82" stroke-width="1.6"/><path d="M9.5 6v3.5l2 2" stroke="#3B6E82" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3 class="svc-title">Social Media Captions</h3>
+        <p class="svc-desc">Twelve to sixteen captions a month across Instagram, Facebook and LinkedIn — varied, on-brand, and planned so you never face a blank caption box again.</p>
+      </div>
+      <div class="svc r d3">
+        <div class="svc-icon"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><rect x="2" y="3" width="15" height="13" rx="2" stroke="#3B6E82" stroke-width="1.6"/><path d="M2 8h15M6 12h4" stroke="#3B6E82" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3 class="svc-title">Email Newsletters</h3>
+        <p class="svc-desc">Two to four emails a month your subscribers actually open — keeping you present between sessions and bringing lapsed clients back through the door.</p>
+      </div>
+      <div class="svc r d1">
+        <div class="svc-icon"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M3 5h13M3 9h9M3 13h11M3 17h6" stroke="#3B6E82" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3 class="svc-title">Website Copy</h3>
+        <p class="svc-desc">A one-off project to make your site say what you actually do — clear, persuasive pages for your services, your story and your booking flow.</p>
+      </div>
+      <div class="svc r d2">
+        <div class="svc-icon"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><rect x="2" y="2" width="15" height="15" rx="3" stroke="#3B6E82" stroke-width="1.6"/><path d="M6 9.5h7M6 6.5h7M6 12.5h4" stroke="#3B6E82" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3 class="svc-title">Content Calendar</h3>
+        <p class="svc-desc">Every plan includes a forward calendar — you'll always know what's going out, where, and when. No more deciding what to post on the day.</p>
+      </div>
+      <div class="svc r d3">
+        <div class="svc-icon"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M2 16l4-5 4 2.5L17 3" stroke="#3B6E82" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 class="svc-title">Strategy Support</h3>
+        <p class="svc-desc">On our Flow plan, a monthly strategy call ties everything to your business goals — what's working, what's next, and where your content should go.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="sec sec--dark">
+  <svg class="topo" id="topo-process" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="wrap">
+    <div class="r">
+      <p class="sec-kicker kicker--sage">How it works</p>
+      <h2 class="sec-h2 h2--light">Simple from day one.</h2>
+      <p class="sec-sub sub--light">No lengthy onboarding, no briefing chaos. Here's exactly what happens when you get in touch.</p>
+    </div>
+    <div class="process-grid">
+      <div class="r d1">
+        <div class="step-n">01</div>
+        <h3 class="step-t">Brief</h3>
+        <p class="step-d">One onboarding conversation. We learn your voice, your clients and your goals, then build a content plan around them. You approve it. We get moving.</p>
+      </div>
+      <div class="r d2">
+        <div class="step-n">02</div>
+        <h3 class="step-t">Create</h3>
+        <p class="step-d">We write, edit and polish — first drafts within 48 hours of an agreed brief. Every piece in your voice, with wellness claims handled carefully and accurately.</p>
+      </div>
+      <div class="r d3">
+        <div class="step-n">03</div>
+        <h3 class="step-t">Deliver</h3>
+        <p class="step-d">Content lands on schedule, ready to post. Two revision rounds are included with every piece — and if it's still not right, we keep working until the brief is met.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="showcase" class="sec sec--cream">
+  <div class="wrap">
+    <div class="r">
+      <p class="sec-kicker kicker--teal">See the work</p>
+      <h2 class="sec-h2 h2--dark">Imagine this is yours.</h2>
+      <p class="sec-sub sub--mid" style="margin-bottom:24px;">This is the standard every client gets. Written as demonstrations for the kinds of practices we serve — the next ones could have your name on them.</p>
+      <div class="show-note">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="#3B6E82" stroke-width="1.4"/><path d="M6.5 6v3.2M6.5 3.8v.4" stroke="#3B6E82" stroke-width="1.4" stroke-linecap="round"/></svg>
+        Demonstration pieces — fictional businesses, real standard of work
+      </div>
+    </div>
+    <div class="samples-grid">
+
+      <div class="sample r d1">
+        <div class="sample-head">
+          <div class="sample-type"><span class="tdot"></span>Blog · Physiotherapy clinic</div>
+          <h4 class="sample-title">"Why Does My Back Hurt More on Monday Mornings?"</h4>
+        </div>
+        <div class="sample-body">
+          <p class="sample-ex">It's one of the most common things we hear in clinic — and no, it isn't just the thought of the working week. Weekend habits, sleep position changes and the sudden return to desk posture all play a part. Here's what's actually happening, and three small Monday-morning adjustments that make a genuine difference…</p>
+          <div class="sample-foot">
+            <span class="s-meta">SEO-led · local search intent</span>
+            <span class="s-badge">Blog</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sample r d2">
+        <div class="sample-head sample-head--email">
+          <div class="email-from"><strong>The Root Note</strong> — a nutritionist's monthly letter</div>
+          <div class="email-subj">The supplement most of my clients don't actually need</div>
+        </div>
+        <div class="sample-body">
+          <p class="sample-ex">Every January, the same question lands in my inbox: "which supplements should I be taking?" And every January, my honest answer surprises people. For most of the clients I see, the gap isn't in a capsule — it's in three foods that are cheaper than any supplement subscription. Here's where I'd start instead…</p>
+          <div class="sample-foot">
+            <span class="s-meta">Monthly · warm, personal voice</span>
+            <span class="s-badge">Newsletter</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sample r d3">
+        <div class="sample-head">
+          <div class="sample-type"><span class="tdot"></span>Instagram · Pilates studio</div>
+        </div>
+        <div class="sample-body">
+          <div class="ig-handle">
+            <div class="ig-avatar">SM</div>
+            <div>
+              <div class="ig-name">Studio Mara</div>
+              <div class="ig-loc">A fictional neighbourhood studio</div>
+            </div>
+          </div>
+          <p class="sample-ex">You don't need to be flexible.<br><br>You don't need the right leggings, a dancer's core, or a single graceful bone in your body.<br><br>You need a mat, an hour, and a room where nobody is grading you. That's the whole entry requirement. Beginners' Pilates starts Tuesday — and "beginner" means it. 🌿</p>
+          <div class="sample-foot">
+            <span class="s-meta">1 of 14 monthly captions</span>
+            <span class="s-badge">Social</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="sec sec--dark">
+  <svg class="topo" id="topo-pricing" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="wrap">
+    <div class="r">
+      <p class="sec-kicker kicker--sage">Pricing</p>
+      <h2 class="sec-h2 h2--light">Pick your pace.</h2>
+      <p class="sec-sub sub--light">Monthly plans, no long contracts. Start where you are — move up when you're ready.</p>
+    </div>
+    <div class="price-grid">
+
+      <div class="plan r d1">
+        <div class="plan-name">Presence</div>
+        <div class="plan-price">£395<small> /month</small></div>
+        <div class="plan-from">For practices that need to stop being invisible</div>
+        <ul class="plan-list">
+          <li>2 blog posts per month</li>
+          <li>8 social media captions</li>
+          <li>Monthly content calendar</li>
+          <li>48hr first drafts · 2 revision rounds</li>
+        </ul>
+        <a href="#cta" class="plan-btn btn-plan-ghost">Start with Presence</a>
+      </div>
+
+      <div class="plan plan--hot r d2">
+        <div class="plan-flag">Most popular</div>
+        <div class="plan-name">Momentum</div>
+        <div class="plan-price">£695<small> /month</small></div>
+        <div class="plan-from">Your whole content presence, handled</div>
+        <ul class="plan-list">
+          <li>4 blog posts per month</li>
+          <li>12 social media captions</li>
+          <li>2 email newsletters</li>
+          <li>Monthly content calendar</li>
+          <li>48hr first drafts · 2 revision rounds</li>
+        </ul>
+        <a href="#cta" class="plan-btn btn-plan-solid">Start with Momentum</a>
+      </div>
+
+      <div class="plan r d3">
+        <div class="plan-name">Flow</div>
+        <div class="plan-price">£1,250<small> /month</small></div>
+        <div class="plan-from">An outsourced content department</div>
+        <ul class="plan-list">
+          <li>4 blog posts per month</li>
+          <li>16 social media captions</li>
+          <li>4 email newsletters</li>
+          <li>Website copy allowance</li>
+          <li>Monthly strategy call</li>
+          <li>Priority turnaround</li>
+        </ul>
+        <a href="#cta" class="plan-btn btn-plan-ghost">Start with Flow</a>
+      </div>
+
+    </div>
+    <p class="price-note">All plans roll monthly — no minimum term. One-off website copy projects quoted individually.</p>
+  </div>
+</section>
+
+<section id="about" class="sec sec--white">
+  <div class="wrap">
+    <div class="r">
+      <p class="sec-kicker kicker--teal">Why SteadyFlow</p>
+      <h2 class="sec-h2 h2--dark">Built for practices<br>that mean it.</h2>
+      <p class="sec-sub sub--mid">There's no shortage of content writers. Here's what makes us worth choosing.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why r d1">
+        <div class="why-ico"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M9.5 2v15M4 6.5c0-2 2.5-3 5.5-3s5.5 1 5.5 3M3 11h13M5 15h9" stroke="#3B6E82" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 class="why-t">Your voice, amplified</h3>
+        <p class="why-d">We don't write in a generic agency voice. We learn how you sound — your warmth, your way of explaining things, the words you'd never use — and write like you on your best day. Your clients should never feel a stranger wrote it.</p>
+      </div>
+      <div class="why r d2">
+        <div class="why-ico"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><rect x="2" y="3" width="15" height="14" rx="2" stroke="#3B6E82" stroke-width="1.5"/><path d="M2 7.5h15M6.5 1.5v3M12.5 1.5v3" stroke="#3B6E82" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 class="why-t">Steady by name</h3>
+        <p class="why-d">The whole point of this service is reliability. Your content calendar stays full, your channels stay active, and deadlines are treated as promises — that's the standard we hold ourselves to on every plan.</p>
+      </div>
+      <div class="why r d3">
+        <div class="why-ico"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M9.5 17s-6.5-4-6.5-9a4 4 0 017-2.5A4 4 0 0117 8c0 5-7.5 9-7.5 9z" stroke="#3B6E82" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3 class="why-t">Wellness is our lane</h3>
+        <p class="why-d">Health-adjacent content carries responsibility. We write carefully — no miracle claims, no overreach into medical advice, nothing that puts your professional reputation at risk. Accurate, warm and trustworthy, like your practice.</p>
+      </div>
+      <div class="why r d4">
+        <div class="why-ico"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M3 10l4 4 9-10" stroke="#3B6E82" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 class="why-t">Fair, clear revisions</h3>
+        <p class="why-d">Two structured revision rounds are included with every single piece — and if something still isn't landing after that, we keep working until the brief is met. Clear boundaries, generous spirit, no surprise invoices.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta" class="sec sec--primary">
+  <svg class="topo" id="topo-cta" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="cta-body r">
+    <h2 class="cta-h2">Ready for content<br>that never stops?</h2>
+    <p class="cta-p">Book a free 30-minute call. No pitch, no pressure — just a straight conversation about your practice, your audience, and whether we're the right fit.</p>
+    <a href="mailto:info@steadyflow.uk?subject=Free%20call%20enquiry" class="btn-white">
+      Book your free call
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M10 5l3 3-3 3" stroke="#3B6E82" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <p class="cta-note">info@steadyflow.uk · 07341 633 649 · No commitment required</p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <svg viewBox="0 0 180 44" width="148" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="7" cy="33" r="7" fill="#3B6E82"/>
+        <circle cx="20" cy="24" r="5" fill="#6EA882"/>
+        <circle cx="30" cy="16" r="3" fill="#F4F8F6" opacity=".72"/>
+        <text x="38" y="36" font-family="Inter,-apple-system,sans-serif" font-size="19" fill="#F4F8F6"><tspan font-weight="700" letter-spacing="-0.03em">Steady</tspan><tspan font-weight="300" dx="3" opacity=".75">Flow</tspan></text>
+      </svg>
+      <p>Content services for wellness practitioners. Blogs, newsletters and social content — written in your voice, delivered on schedule.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Services</h4>
+      <a href="#services">Blog Posts</a>
+      <a href="#services">Social Media Captions</a>
+      <a href="#services">Email Newsletters</a>
+      <a href="#services">Website Copy</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="foot-col">
+      <h4>Company</h4>
+      <a href="#about">Why SteadyFlow</a>
+      <a href="#process">How it works</a>
+      <a href="#showcase">See the work</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+    <div class="foot-col">
+      <h4>Get in touch</h4>
+      <a href="mailto:info@steadyflow.uk">info@steadyflow.uk</a>
+      <a href="tel:+447341633649">07341 633 649</a>
+      <a href="#cta">Book a free call</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span class="foot-copy">© 2026 SteadyFlow Content Services</span>
+    <div class="foot-links">
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  function prng(seed) {
+    let s = (seed >>> 0) || 1;
+    return function () {
+      s ^= s << 13; s >>>= 0; s ^= s >>> 17; s ^= s << 5; s >>>= 0;
+      return s / 0xFFFFFFFF;
+    };
+  }
+  function buildTopo(el, color, opacity, seed) {
+    if (!el) return;
+    const W = 1400, H = 700;
+    el.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    const r = prng(seed);
+    let y = -20;
+    while (y < H + 20) {
+      const f1 = .0009 + r() * .0015, f2 = .0025 + r() * .0038, f3 = .007 + r() * .005;
+      const a1 = 8 + r() * 16, a2 = a1 * (.2 + r() * .2), a3 = a1 * .07;
+      const p1 = r()*6.28, p2 = r()*6.28, p3 = r()*6.28;
+      const sw = .45 + r() * .72, op = opacity * (.5 + r() * .5);
+      const pts = [];
+      for (let x = -10; x <= W + 10; x += 6) {
+        const dy = Math.sin(x*f1+p1)*a1 + Math.sin(x*f2+p2)*a2 + Math.sin(x*f3+p3)*a3;
+        pts.push(x + ',' + (y + dy).toFixed(1));
+      }
+      const ln = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+      ln.setAttribute('points', pts.join(' '));
+      ln.setAttribute('stroke', color);
+      ln.setAttribute('stroke-opacity', op.toFixed(3));
+      ln.setAttribute('stroke-width', sw.toFixed(2));
+      ln.setAttribute('fill', 'none');
+      ln.setAttribute('stroke-linecap', 'round');
+      el.appendChild(ln);
+      y += 18 + r() * 28;
+    }
+    for (let i = 0; i < 8; i++) {
+      const cx = -60 + r()*(W+120), cy = -30 + r()*(H+60);
+      const rx = 65 + r()*190, ry = 7 + r()*20;
+      const dF = 2 + Math.floor(r()*4), dA = 4 + r()*9, dP = r()*6.28;
+      const pts = [];
+      for (let j = 0; j <= 120; j++) {
+        const a = (j/120)*6.28, d = Math.sin(a*dF+dP)*dA;
+        pts.push((cx+(rx+d)*Math.cos(a)).toFixed(1)+','+(cy+(ry+d*.12)*Math.sin(a)).toFixed(1));
+      }
+      const ov = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+      ov.setAttribute('points', pts.join(' '));
+      ov.setAttribute('stroke', color);
+      ov.setAttribute('stroke-opacity', (opacity * .32).toFixed(3));
+      ov.setAttribute('stroke-width', '.6');
+      ov.setAttribute('fill', 'none');
+      el.appendChild(ov);
+    }
+  }
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('solid', window.scrollY > 55);
+  }, { passive: true });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.r').forEach(function (el) { io.observe(el); });
+  function init() {
+    buildTopo(document.getElementById('topo-hero'),    '#3B6E82', .22, 9173);
+    buildTopo(document.getElementById('topo-process'), '#3B6E82', .22, 4821);
+    buildTopo(document.getElementById('topo-pricing'), '#3B6E82', .22, 2741);
+    buildTopo(document.getElementById('topo-cta'),     '#ffffff', .18, 9173);
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+})();
+</script>
+</body>
+</html>
