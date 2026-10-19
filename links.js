@@ -5,7 +5,7 @@
 */
 window.SF_LINKS = {
   // Google Calendar booking page (free intro calls and onboarding calls)
-  booking: "",
+  booking: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ye57mvU3wBO07s1_OSTeX1_vb-DlQ0_sxUTIy1AzqbBTAO-ZEv3CmqFSBgRr4Bcebm1vv4Ivj?gv=true",
 
   // Stripe customer portal login (clients manage their card, plan or cancellation)
   portal: "https://billing.stripe.com/p/login/5kQeVdc6ufbAgLj4Ct8g000",
