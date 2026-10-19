@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start your plan | SteadyFlow</title>
+<meta name="description" content="Three steps to start working with SteadyFlow: complete onboarding, pay your first month, and book your onboarding call.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sf.css">
+</head>
+<body>
+<header class="band">
+  <svg class="topo" data-seed="5113" aria-hidden="true"></svg>
+  <div class="bar">
+    <a class="home" href="index.html"><svg viewBox="0 0 192 46" width="150" height="36" role="img" aria-label="SteadyFlow" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="35" r="8" fill="#3B6E82"/><circle cx="22" cy="25" r="5.5" fill="#6EA882"/><circle cx="33" cy="17" r="3.5" fill="#F4F8F6" opacity=".82"/><text x="42" y="38" font-family="Inter,-apple-system,sans-serif" font-size="20" fill="#F4F8F6"><tspan font-weight="700" letter-spacing="-0.03em">Steady</tspan><tspan font-weight="300" dx="4" opacity=".8">Flow</tspan></text></svg></a>
+    <nav aria-label="Main">
+      <a class="hide-sm" href="index.html#pricing">Plans</a>
+      <a class="hide-sm" href="index.html#showcase">See the work</a>
+      <a href="mailto:info@steadyflow.uk?subject=Booking%20a%20free%20call" data-link="booking">Book a free call</a>
+    </nav>
+  </div>
+  <div class="band-body">
+    <p class="crumb"><a href="index.html#pricing">Plans</a> / Start</p>
+    <h1>Let's get you started</h1>
+    <p class="lede">Three steps, about 25 minutes in total. After that, your first content calendar arrives within 48 hours of your onboarding call.</p>
+  </div>
+</header>
+
+<main class="page single">
+  <div class="main">
+    <h2>Your plan</h2>
+    <p class="sub">You can change this now, or any time later before your next payment.</p>
+    <form class="picker" data-plan-picker data-default="momentum" onsubmit="return false">
+      <input type="radio" name="plan" id="p-presence" value="presence"><label for="p-presence"><b>Presence</b><span>£395/month</span></label>
+      <input type="radio" name="plan" id="p-momentum" value="momentum"><label for="p-momentum"><b>Momentum</b><span>£695/month</span></label>
+      <input type="radio" name="plan" id="p-flow" value="flow"><label for="p-flow"><b>Flow</b><span>£1,250/month</span></label>
+    </form>
+
+    <ol class="path">
+      <li data-step="1">
+        <h2>Tell us about your practice</h2>
+        <p class="meta">About 20 minutes</p>
+        <p>A short form covering your clients, your voice and your goals. At the end you'll read and accept our agreement, so everything is done in one place, and you'll get a copy of your answers by email.</p>
+        <a class="btn btn-dark" href="mailto:info@steadyflow.uk?subject=Onboarding%20form" data-link="onboarding">Open the onboarding form</a>
+        <p class="small">Choose <b data-plan-name>Momentum</b> on the form. Before you start, you can read the <a href="#" data-link="docs.agreement">agreement</a> and <a href="#" data-link="docs.privacy">privacy notice</a>.</p>
+      </li>
+      <li data-step="2">
+        <h2>Pay your first month</h2>
+        <p class="meta"><span data-plan-name>Momentum</span>, <span data-plan-price>£695</span> a month</p>
+        <p>Secure card or Apple Pay checkout through Stripe. You're billed today, then on the same date each month. Update your card or cancel any time from your account.</p>
+        <a class="btn btn-primary" href="mailto:info@steadyflow.uk" data-pay-button data-same-tab><span>Pay for <span data-plan-name>Momentum</span></span></a>
+        <p class="small">Please complete step 1 first, so we have your agreement before we take payment. <a href="momentum.html" data-plan-href>See what's included</a>.</p>
+      </li>
+      <li data-step="3">
+        <h2>Book your onboarding call</h2>
+        <p class="meta">30 minutes, by video</p>
+        <p>Once you've paid, you'll be taken straight to our calendar to pick a time. Calls run early mornings, evenings and Saturday mornings, so they fit around your own clients.</p>
+        <p class="small">We'll also email you within 1 working day to confirm everything.</p>
+      </li>
+    </ol>
+
+    <div class="callout">
+      <h3>Rather talk first?</h3>
+      <p>Book a free 30-minute call with no obligation. We'll talk about your practice and whether we're the right fit.</p>
+      <a class="btn btn-line" href="mailto:info@steadyflow.uk?subject=Booking%20a%20free%20call" data-link="booking">Book a free call</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  <div class="in">
+    <span>© 2026 SteadyFlow · info@steadyflow.uk · 07341 633 649</span>
+    <nav aria-label="Footer">
+      <a href="index.html#pricing">Plans</a>
+      <a href="mailto:info@steadyflow.uk?subject=Managing%20my%20subscription" data-link="portal">Manage your subscription</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</footer>
+<script src="links.js"></script>
+<script src="sf.js"></script>
+</body>
+</html>
