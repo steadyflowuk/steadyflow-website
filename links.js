@@ -15,9 +15,9 @@ window.SF_LINKS = {
 
   // Stripe payment links, one per plan
   pay: {
-    presence: "",
-    momentum: "",
-    flow: ""
+    presence: "https://buy.stripe.com/00wcN5eeC5B01Qp5Gx8g002",
+    momentum: "https://buy.stripe.com/28E3cv9Ym6F4fHf6KB8g001",
+    flow: "https://buy.stripe.com/5kQeVdc6ufbAgLj4Ct8g000"
   },
 
   // Client documents (Google Docs, view only)
