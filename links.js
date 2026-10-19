@@ -8,7 +8,7 @@ window.SF_LINKS = {
   booking: "",
 
   // Stripe customer portal login (clients manage their card, plan or cancellation)
-  portal: "",
+  portal: "https://billing.stripe.com/p/login/5kQeVdc6ufbAgLj4Ct8g000",
 
   // Onboarding form: questionnaire + agreement acceptance
   onboarding: "https://docs.google.com/forms/d/e/1FAIpQLSdx-eHlctmwOLqfwj7aUEUnpwL7oYaXVzW-F2UwYQXX21ILnw/viewform",
