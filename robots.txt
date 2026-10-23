@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /welcome.html
 
 Sitemap: https://steadyflow.uk/sitemap.xml
