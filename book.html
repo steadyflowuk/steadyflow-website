@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a call | SteadyFlow</title>
+<meta name="description" content="Book a free 30-minute call with SteadyFlow, or your onboarding call if you've already signed up. Early mornings and evenings, by Google Meet.">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0D1C22">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SteadyFlow">
+<meta property="og:title" content="Book a call | SteadyFlow">
+<meta property="og:description" content="Book a free 30-minute call with SteadyFlow, or your onboarding call if you've already signed up. Early mornings and evenings, by Google Meet.">
+<meta property="og:url" content="https://steadyflow.uk/book.html">
+<meta property="og:image" content="https://steadyflow.uk/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://steadyflow.uk/book.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sf.css">
+<style>
+.cal { position:relative; background:var(--card); border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 18px 50px rgba(13,28,34,.08); }
+.cal::before { content:''; position:absolute; left:0; right:0; top:0; height:3px; background:var(--bullion); z-index:1; }
+.cal-head { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:20px 24px 16px; border-bottom:1px solid var(--line); }
+.cal-head b { font-size:16px; color:var(--dark); letter-spacing:-.01em; }
+.cal-head span { font-size:13.5px; color:var(--muted); }
+.cal iframe { display:block; width:100%; height:720px; border:0; background:#fff; }
+.cal-fallback { font-size:14px; color:var(--muted); margin-top:14px; }
+.expect { list-style:none; margin:4px 0 6px; }
+.expect li { position:relative; padding:0 0 14px 18px; font-size:14.5px; color:var(--ink); line-height:1.55; }
+.expect li::before { content:''; position:absolute; left:0; top:.55em; width:7px; height:7px; border-radius:50%; background:var(--accent); }
+.expect li b { color:var(--dark); }
+@media (max-width:900px) { .cal iframe { height:860px; } }
+</style>
+</head>
+<body>
+<header class="band">
+  <svg class="topo" data-seed="5113" aria-hidden="true"></svg>
+  <div class="bar">
+    <a class="home" href="index.html"><svg viewBox="0 0 192 46" width="150" height="36" role="img" aria-label="SteadyFlow" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="35" r="8" fill="#3B6E82"/><circle cx="22" cy="25" r="5.5" fill="#6EA882"/><circle cx="33" cy="17" r="3.5" fill="#E2C27A"/><text x="42" y="38" font-family="Inter,-apple-system,sans-serif" font-size="20" fill="#F4F8F6"><tspan font-weight="700" letter-spacing="-0.03em">Steady</tspan><tspan font-weight="300" dx="4" opacity=".8">Flow</tspan></text></svg></a>
+    <nav aria-label="Main">
+      <a class="hide-sm" href="index.html#pricing">Plans</a>
+      <a class="hide-sm" href="index.html#websites">Websites</a>
+      <a class="hide-sm" href="index.html#showcase">See the work</a>
+    </nav>
+  </div>
+  <div class="band-body">
+    <h1>Book a call</h1>
+    <p class="lede">Pick a time that suits you. Calls are 30 minutes on Google Meet, early mornings or evenings (UK time), so they fit around your own clients.</p>
+  </div>
+</header>
+
+<main class="page">
+  <div class="main">
+    <div class="cal">
+      <div class="cal-head"><b>SteadyFlow call, 30 minutes</b><span>Times shown in your time zone</span></div>
+      <iframe id="booking-frame" title="Book a SteadyFlow call" loading="lazy"></iframe>
+    </div>
+    <p class="cal-fallback">Calendar not loading? <a href="mailto:info@steadyflow.uk?subject=Booking%20a%20call" data-link="bookingEmbed">Open the booking page in a new tab</a>, or email <a href="mailto:info@steadyflow.uk">info@steadyflow.uk</a>.</p>
+  </div>
+
+  <aside class="aside" aria-label="What to expect">
+    <div class="plan">What to expect</div>
+    <ul class="expect">
+      <li><b>A free intro call.</b> No pitch and no pressure, just a straight conversation about your practice, your audience and whether we're the right fit.</li>
+      <li><b>Already signed up?</b> Use this same calendar to book your onboarding call.</li>
+      <li><b>What we'll ask for:</b> your name, email and business name, plus a phone number if you'd like us to have one.</li>
+      <li><b>Straight after booking</b> you'll get a confirmation email with the Google Meet link.</li>
+    </ul>
+    <hr>
+    <div class="other">
+      <span style="color:var(--muted)">Can't find a time?</span>
+      <a href="mailto:info@steadyflow.uk?subject=Finding%20a%20time%20for%20a%20call">Email us and we'll find one</a>
+      <a href="tel:+447341633649">07341 633 649</a>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  <div class="in">
+    <span>© 2026 SteadyFlow Content Services, run by Alexanda Bertram (sole trader) · 22 Harcourt Drive, Morley, Leeds, LS27 9SH · info@steadyflow.uk · 07341 633 649</span>
+    <nav aria-label="Footer">
+      <a href="index.html#pricing">Plans</a>
+      <a href="mailto:info@steadyflow.uk?subject=Managing%20my%20subscription" data-link="portal">Manage your subscription</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</footer>
+<script src="links.js"></script>
+<script src="sf.js"></script>
+<script>
+  (function () {
+    var url = (window.SF_LINKS || {}).bookingEmbed;
+    var f = document.getElementById('booking-frame');
+    if (url && f) f.src = url;
+  })();
+</script>
+</body>
+</html>

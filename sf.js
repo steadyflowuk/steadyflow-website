@@ -66,9 +66,24 @@
     var s = (seed >>> 0) || 1;
     return function () { s ^= s << 13; s >>>= 0; s ^= s >>> 17; s ^= s << 5; s >>>= 0; return s / 0xFFFFFFFF; };
   }
+  // Gold "bullion" stroke: a metallic gradient across the drawing
+  function goldStroke(el, id) {
+    var NS = 'http://www.w3.org/2000/svg';
+    var defs = document.createElementNS(NS, 'defs'), g = document.createElementNS(NS, 'linearGradient');
+    g.setAttribute('id', id); g.setAttribute('gradientUnits', 'userSpaceOnUse');
+    g.setAttribute('x1', '0'); g.setAttribute('y1', '0'); g.setAttribute('x2', '1400'); g.setAttribute('y2', '220');
+    [['0', '#8A6A2F'], ['.18', '#E9CF85'], ['.36', '#B08A3C'], ['.55', '#F4E3A6'], ['.74', '#A47C34'], ['1', '#DDBB66']].forEach(function (st) {
+      var s = document.createElementNS(NS, 'stop'); s.setAttribute('offset', st[0]); s.setAttribute('stop-color', st[1]); g.appendChild(s);
+    });
+    defs.appendChild(g); el.appendChild(defs);
+    return 'url(#' + id + ')';
+  }
+  var topoCount = 0;
   function buildTopo(el) {
-    var color = el.getAttribute('data-color') || '#3B6E82';
-    var opacity = parseFloat(el.getAttribute('data-opacity') || '.22');
+    var color = el.getAttribute('data-color') || 'gold';
+    var opacity = parseFloat(el.getAttribute('data-opacity') || '.8');
+    var bold = color === 'gold';
+    if (bold) color = goldStroke(el, 'sf-gold-' + (topoCount++));
     var seed = parseInt(el.getAttribute('data-seed') || '2741', 10);
     var W = 1400, H = 500, r = prng(seed), y = -20;
     el.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
@@ -77,7 +92,7 @@
       var f1 = .0009 + r() * .0015, f2 = .0025 + r() * .0038, f3 = .007 + r() * .005;
       var a1 = 8 + r() * 16, a2 = a1 * (.2 + r() * .2), a3 = a1 * .07;
       var p1 = r() * 6.28, p2 = r() * 6.28, p3 = r() * 6.28;
-      var sw = .45 + r() * .72, op = opacity * (.5 + r() * .5), pts = [];
+      var sw = bold ? (1.1 + r() * 1.2) : (.45 + r() * .72), op = opacity * (.5 + r() * .5), pts = [];
       for (var x = -10; x <= W + 10; x += 6) {
         var dy = Math.sin(x * f1 + p1) * a1 + Math.sin(x * f2 + p2) * a2 + Math.sin(x * f3 + p3) * a3;
         pts.push(x + ',' + (y + dy).toFixed(1));
