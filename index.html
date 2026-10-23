@@ -52,7 +52,7 @@ body {
 .r { opacity:0; transform:translateY(30px); transition:opacity .7s ease, transform .7s ease; }
 .r.in { opacity:1; transform:none; }
 .r.d1{transition-delay:.08s}.r.d2{transition-delay:.16s}.r.d3{transition-delay:.24s}.r.d4{transition-delay:.32s}
-@media(prefers-reduced-motion:reduce){ .r{opacity:1;transform:none;transition:none} .topo--drift{animation:none} }
+@media(prefers-reduced-motion:reduce){ .r{opacity:1;transform:none;transition:none} .topo--drift{animation:none} .rot > *{transition:none;filter:none} .r.in .shine{animation:none} }
 
 /* NAV */
 #nav { position:fixed; top:0; left:0; right:0; z-index:200; transition:background .35s, box-shadow .35s; }
@@ -71,6 +71,24 @@ body {
 .hero-tag::before { content:''; width:22px; height:1px; background:var(--accent); }
 .hero-h1 { font-size:clamp(48px,8vw,92px); font-weight:700; letter-spacing:-.045em; line-height:.98; color:var(--light); margin-bottom:26px; opacity:0; animation:fadeUp .7s ease .4s both; max-width:860px; }
 .hero-h1 span { color:var(--accent); }
+/* Rotating lines: every phrase sits in the same grid cell, so the layout never jumps */
+.rot { display:inline-grid; vertical-align:top; }
+.rot > * { grid-area:1/1; opacity:0; transform:translateY(.28em); filter:blur(6px); transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1), filter .9s ease; pointer-events:none; }
+.rot > .on { opacity:1; transform:none; filter:none; pointer-events:auto; }
+.rot > .off { opacity:0; transform:translateY(-.22em); filter:blur(6px); }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+/* Plan carousel under the hero buttons */
+.hero-plans { margin-top:34px; opacity:0; animation:fadeUp .7s ease 1.1s both; }
+.hero-plans .rot { display:grid; grid-template-columns:minmax(0,1fr); }
+.plan-pill { display:inline-flex; align-items:center; gap:12px; width:max-content; max-width:100%; padding:10px 18px 10px 12px; border-radius:22px; line-height:1.4; text-decoration:none; background:rgba(13,28,34,.72); border:1px solid rgba(226,194,122,.32); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); font-size:13px; color:rgba(247,243,234,.78); }
+.plan-pill b { font-weight:600; color:var(--light); }
+.plan-pill i { font-style:normal; font-weight:700; background:var(--bullion); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.plan-pill .gem { width:8px; height:8px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(226,194,122,.15); flex-shrink:0; }
+.plan-pill:hover { border-color:rgba(226,194,122,.65); color:var(--light); }
+/* A slow light passing over the gold figures as they come into view */
+@keyframes goldSweep { from { background-position:100% 0; } to { background-position:0 0; } }
+.shine { background-size:220% 100% !important; background-position:100% 0; }
+.r.in .shine, .r.in.shine { animation:goldSweep 2.6s cubic-bezier(.3,.6,.2,1) .25s both; }
 .hero-p { font-size:clamp(16px,1.8vw,19px); font-weight:300; color:rgba(244,248,246,.60); line-height:1.68; max-width:520px; margin-bottom:46px; opacity:0; animation:fadeUp .7s ease .65s both; }
 .hero-btns { display:flex; gap:16px; align-items:center; flex-wrap:wrap; opacity:0; animation:fadeUp .7s ease .88s both; }
 .btn-sage { display:inline-flex; align-items:center; gap:9px; background:var(--accent); color:var(--dark); font-size:14px; font-weight:600; padding:14px 28px; border-radius:100px; text-decoration:none; transition:background .18s, transform .18s, box-shadow .18s; }
@@ -237,6 +255,9 @@ footer { background:var(--dark); padding:68px 48px 36px; border-top:1px solid rg
   .foot-bottom { flex-direction:column; align-items:flex-start; }
   .nav-links { gap:18px; }
   .nav-links li:not(:last-child) { display:none; }
+  .scroll-cue { display:none; }
+  .plan-pill { font-size:12.5px; align-items:flex-start; }
+  .plan-pill .gem { margin-top:5px; }
 }
 </style>
 <script type="application/ld+json">
@@ -289,7 +310,12 @@ footer { background:var(--dark); padding:68px 48px 36px; border-top:1px solid rg
   <svg class="topo topo--drift topo--soft-left" id="topo-hero" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"></svg>
   <div class="hero-body">
     <p class="hero-tag">Content for Wellness Practitioners</p>
-    <h1 class="hero-h1">Your practice, heard.<br><span>Consistently.</span></h1>
+    <h1 class="hero-h1">Your practice, heard.<br><span class="sr-only">Consistently.</span><span class="rot" data-rotate="3600" aria-hidden="true">
+      <span class="on">Consistently.</span>
+      <span>In your voice.</span>
+      <span>Every month.</span>
+      <span>Done properly.</span>
+    </span></h1>
     <p class="hero-p">Blogs, newsletters, social content and website updates for coaches, therapists, studios and clinics — written in your voice, delivered on schedule, while you focus on your clients.</p>
     <div class="hero-btns">
       <a href="#cta" class="btn-sage" data-link="booking">
@@ -300,6 +326,14 @@ footer { background:var(--dark); padding:68px 48px 36px; border-top:1px solid rg
         See what it could look like
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 3v8M4 8l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
+    </div>
+    <div class="hero-plans" aria-label="Plans at a glance">
+      <div class="rot" data-rotate="4200" data-offset="1800">
+        <a class="plan-pill on" href="presence.html"><span class="gem"></span><b>Presence</b><span><i>£395</i>/month · 2 blogs, 8 captions and a content calendar</span></a>
+        <a class="plan-pill" href="momentum.html"><span class="gem"></span><b>Momentum</b><span><i>£695</i>/month · adds email newsletters · most popular</span></a>
+        <a class="plan-pill" href="flow.html"><span class="gem"></span><b>Flow</b><span><i>£1,250</i>/month · website pages and a monthly strategy call</span></a>
+        <a class="plan-pill" href="#websites"><span class="gem"></span><b>Websites</b><span>Updates to the site you have, or a new one built</span></a>
+      </div>
     </div>
   </div>
   <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
@@ -408,17 +442,17 @@ footer { background:var(--dark); padding:68px 48px 36px; border-top:1px solid rg
     </div>
     <div class="process-grid">
       <div class="r d1">
-        <div class="step-n">01</div>
+        <div class="step-n shine">01</div>
         <h3 class="step-t">Brief</h3>
         <p class="step-d">One onboarding form and one short call. We learn your voice, your clients and your goals, then build a content plan around them. You approve it. We get moving.</p>
       </div>
       <div class="r d2">
-        <div class="step-n">02</div>
+        <div class="step-n shine">02</div>
         <h3 class="step-t">Create</h3>
         <p class="step-d">We write, edit and polish — first drafts within 48 hours of an agreed brief. Every piece in your voice, with wellness claims handled carefully and accurately.</p>
       </div>
       <div class="r d3">
-        <div class="step-n">03</div>
+        <div class="step-n shine">03</div>
         <h3 class="step-t">Deliver</h3>
         <p class="step-d">Content lands on schedule, ready to post. Every piece includes two rounds of revisions, so you can shape it until it sounds like you.</p>
       </div>
@@ -503,7 +537,7 @@ footer { background:var(--dark); padding:68px 48px 36px; border-top:1px solid rg
 
       <div class="plan r d1">
         <div class="plan-name">Presence</div>
-        <div class="plan-price"><b>£395</b><small> /month</small></div>
+        <div class="plan-price"><b class="shine">£395</b><small> /month</small></div>
         <div class="plan-from">For practices that need to stop being invisible</div>
         <ul class="plan-list">
           <li>2 blog posts per month</li>
@@ -517,7 +551,7 @@ footer { background:var(--dark); padding:68px 48px 36px; border-top:1px solid rg
       <div class="plan plan--hot r d2">
         <div class="plan-flag">Most popular</div>
         <div class="plan-name">Momentum</div>
-        <div class="plan-price"><b>£695</b><small> /month</small></div>
+        <div class="plan-price"><b class="shine">£695</b><small> /month</small></div>
         <div class="plan-from">Your whole content presence, handled</div>
         <ul class="plan-list">
           <li>4 blog posts per month</li>
@@ -531,7 +565,7 @@ footer { background:var(--dark); padding:68px 48px 36px; border-top:1px solid rg
 
       <div class="plan r d3">
         <div class="plan-name">Flow</div>
-        <div class="plan-price"><b>£1,250</b><small> /month</small></div>
+        <div class="plan-price"><b class="shine">£1,250</b><small> /month</small></div>
         <div class="plan-from">An outsourced content department</div>
         <ul class="plan-list">
           <li>4 blog posts per month</li>
@@ -718,6 +752,23 @@ footer { background:var(--dark); padding:68px 48px 36px; border-top:1px solid rg
     });
   }, { threshold: 0.10 });
   document.querySelectorAll('.r').forEach(function (el) { io.observe(el); });
+
+  // Rotating lines (hero headline and plan carousel)
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-rotate]').forEach(function (box) {
+    var items = Array.prototype.slice.call(box.children), i = 0;
+    if (still || items.length < 2) return;
+    items.forEach(function (el, n) { if (n) { el.setAttribute('tabindex', '-1'); } });
+    function next() {
+      if (document.hidden) return;
+      var cur = items[i]; i = (i + 1) % items.length; var nxt = items[i];
+      cur.classList.remove('on'); cur.classList.add('off'); cur.setAttribute('tabindex', '-1');
+      nxt.classList.remove('off'); nxt.classList.add('on'); nxt.removeAttribute('tabindex');
+      setTimeout(function () { cur.classList.remove('off'); }, 900);
+    }
+    var every = parseInt(box.getAttribute('data-rotate'), 10) || 3600;
+    setTimeout(function () { setInterval(next, every); }, parseInt(box.getAttribute('data-offset') || '0', 10) + 1200);
+  });
   function init() {
     buildTopo(document.getElementById('topo-hero'),    'gold', .95, 9173);
     buildTopo(document.getElementById('topo-process'), 'gold', .62, 4821);

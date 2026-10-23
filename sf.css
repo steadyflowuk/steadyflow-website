@@ -30,6 +30,8 @@ a:focus-visible, button:focus-visible, input:focus-visible + label { outline:2px
 .band .lede { font-size:clamp(17px,2vw,20px); font-weight:300; color:rgba(244,248,246,.72); max-width:34em; margin-top:18px; line-height:1.55; }
 .price-line { display:flex; align-items:baseline; gap:10px; margin-top:26px; }
 .price-line .amt { font-size:34px; font-weight:700; letter-spacing:-.03em; background:var(--bullion); -webkit-background-clip:text; background-clip:text; color:transparent; }
+@keyframes goldSweep { from { background-position:100% 0; } to { background-position:0 0; } }
+.price-line .amt, .ledger .qty { background-size:220% 100%; background-position:0 0; animation:goldSweep 2.6s cubic-bezier(.3,.6,.2,1) .5s both; }
 .price-line .per { font-size:15px; color:rgba(244,248,246,.6); }
 
 /* Layout */
@@ -135,4 +137,4 @@ p { max-width:40em; }
   .path > li::after { left:21.5px; top:50px; }
   .picker label { min-width:0; flex:1 1 30%; padding:10px 12px; }
 }
-@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .price-line .amt, .ledger .qty { animation:none; } }
